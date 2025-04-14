@@ -35,12 +35,12 @@ designation = st.sidebar.text_input("Designation")
 seniority = st.sidebar.date_input("Seniority Date")
 
 # Base Pay & Increase
-base = st.sidebar.number_input("Base Pay", value=50000)
+base = st.sidebar.number_input("Base Pay", value=0)
 adjustment = st.sidebar.number_input("Increase/Decrease (%)", value=0)
 base_adj = base * (1 + adjustment / 100)
 
 # Other Inputs
-transport = st.sidebar.number_input("Transportation Allowance", value=8000)
+transport = st.sidebar.number_input("Transportation Allowance", value=10010)
 shift = st.sidebar.number_input("Shift Allowance", value=0)
 entertainment = st.sidebar.number_input("Entertainment Allowance", value=0)
 laundry = st.sidebar.number_input("Laundry Allowance", value=0)
