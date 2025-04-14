@@ -22,8 +22,10 @@ DATA_FILE = "salary_records.csv"
 if os.path.exists(DATA_FILE):
     df = pd.read_csv(DATA_FILE)
 else:
-    df = pd.DataFrame(columns=["Name", "PRN", "Designation", "Seniority Date", "Year", 
-                               "Base Pay", "Gross Pay", "Total Deductions", "Net Salary"])
+    df = pd.DataFrame(columns=[
+        "Name", "PRN", "Designation", "Seniority Date", "Year",
+        "Base Pay", "Gross Pay", "Total Deductions", "Net Salary"
+    ])
 
 # Sidebar - Staff Info
 st.sidebar.header("📋 Staff Information")
@@ -74,12 +76,14 @@ gross, deduction, net = calculate(base_adj)
 
 # Submit
 if st.sidebar.button("💾 Save Record"):
-    df = df.append({
+    new_row = pd.DataFrame([{
         "Name": name, "PRN": prn, "Designation": designation,
         "Seniority Date": seniority, "Year": year,
         "Base Pay": base_adj, "Gross Pay": gross,
         "Total Deductions": deduction, "Net Salary": net
-    }, ignore_index=True)
+    }])
+
+    df = pd.concat([df, new_row], ignore_index=True)
     df.to_csv(DATA_FILE, index=False)
     st.success("Record saved successfully!")
 
@@ -123,4 +127,3 @@ if selected:
         pdf.output(path)
         with open(path, "rb") as f:
             st.download_button("⬇️ Download Salary Slip PDF", data=f, file_name=path)
-
